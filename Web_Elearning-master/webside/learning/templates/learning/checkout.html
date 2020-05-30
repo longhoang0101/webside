@@ -1,0 +1,172 @@
+{% extends "learning/base.html" %}
+
+
+{% block page-container %}
+
+<div style="width: 90%; margin: auto">
+ <div class="row" style="margin-top: 3%; margin-bottom: 3%">
+        <div class="col-md-4 order-md-2 mb-4">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Khóa học</span>
+            <span class="badge badge-secondary badge-pill">1</span>
+          </h4>
+          <ul class="list-group mb-3" style="margin-top: 11.2%">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Tên khóa học</h6>
+                <small class="text-muted">{{course.course_name}}</small>
+              </div>
+
+            </li>
+              <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Ngành học</h6>
+                <small class="text-muted">{{course.course_cate_id.course_cate_name}}</small>
+              </div>
+            </li>
+              </ul>
+            </li>
+             <form class="card p-2">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Mã giảm giá">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-secondary">Xác nhận</button>
+              </div>
+            </div>
+          </form>
+
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Tổng tiền (VNĐ)</span>
+              <strong>{{course.course_price}}đ</strong>
+            </li>
+          </ul>
+
+
+        </div>
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">Địa chỉ thanh toán</h4>
+          <form method="post" class="needs-validation" action="" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="user_id" value="{{request.user.id}}" id="id_user_id">
+            <input type="hidden" name="course_id" value="{{course.course_id}}" id="id_course_id">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="firstName">Họ</label>
+                <input type="text" class="form-control" id="firstName" name="bill_fn" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                  Vui lòng nhập họ.
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="lastName">Tên</label>
+                <input type="text" class="form-control" id="lastName" name="bill_ln" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                  Vui lòng nhập tên.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email">Email <span class="text-muted">(Tùy chọn)</span></label>
+              <input name="bill_mail" type="email" class="form-control" id="email" placeholder="you@example.com">
+              <div class="invalid-feedback">
+                Vui lòng nhập đúng địa chỉ email để nhận hóa đơn điện tử.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="address">Địa chỉ</label>
+              <input type="text" class="form-control" name="bill_address" id="address" placeholder="1234 Main St" required>
+              <div class="invalid-feedback">
+                Vui lòng nhập địa chỉ gửi hóa đơn.
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5 mb-3">
+                <label for="country">Quốc gia</label>
+                <select class="custom-select d-block w-100" name="bill_country" id="country" required>
+                  <option value="">Chọn...</option>
+                  <option>Việt Nam</option>
+                </select>
+                <div class="invalid-feedback">
+                  Vui lòng chọn quốc gia.
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="state">Tỉnh/Thành phố</label>
+                <select class="custom-select d-block w-100" id="state" name="bill_city" required>
+                  <option value="">Chọn...</option>
+                  <option>TP. Hồ Chí Minh</option>
+                    <option>Bình DƯơng</option>
+                </select>
+                <div class="invalid-feedback">
+                  Vui lòng chọn tỉnh/thành phố .
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="zip">Zip</label>
+                <input type="text" class="form-control" name="bill_zip" id="zip" placeholder="" required>
+                <div class="invalid-feedback">
+                  Vui lòng nhập mã bưu điện.
+                </div>
+              </div>
+            </div>
+
+            <hr class="">
+            <h4 class="mb-3">Phương thức thanh toán</h4>
+
+            <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                <label class="custom-control-label" for="credit"><i class="fa fa-cc-visa" style="color:navy;"></i>  </label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                <label class="custom-control-label" for="debit">Thẻ ghi nợ</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
+                <label class="custom-control-label" for="paypal">Paypal</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="cc-name">Tên trên thẻ</label>
+                <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                <small class="text-muted">Đầy đủ họ tên ghi trên thẻ</small>
+                <div class="invalid-feedback">
+                  Vui lòng nhập tên trên thẻ
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="cc-number">Mã thẻ</label>
+                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                <div class="invalid-feedback">
+                  Vui lòng nhập mã thẻ.
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="cc-expiration">Ngày hết hạn</label>
+                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                <div class="invalid-feedback">
+                  Vui lòng nhập ngày hết hạn.
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="cc-expiration">CVV</label>
+                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                <div class="invalid-feedback">
+                  Vui lòng nhập mã CCV.
+                </div>
+              </div>
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Thanh toán</button>
+          </form>
+        </div>
+      </div>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "learning/base.html" %}
+
+
+{% block page-container %}
+    {% if user.is_authenticated %}
+                <meta http-equiv="REFRESH" content="0;url=/learning">
+        {% else %}
+    <div class="col-12 col-lg-6" style="margin: auto">
+
+         {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+
+        	<div  class="contact-form" style="margin: auto; margin-bottom: 10%; margin-top: 10%">
+			<form class="login-form" method="post" >
+                 {% csrf_token %}
+				<h3 class="form-title" style="text-align: center;">Đăng ký</h3>
+				<p style="color:#8290a3;">Vui lòng cung cấp thông tin đăng ký</p>
+				<input placeholder="Tài khoản" class="form-control" type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username">
+				<input placeholder="Mật khẩu" class="form-control" type="password" name="password1" autocomplete="new-password" required="" id="id_password1">
+				<input placeholder="Nhập lại mật khẩu" class="form-control" type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
+
+				<div class="form-actions">
+					<input type="checkbox" id ="rememberMe" name="rememberMe">
+					<label style="color: #8290a3;" for="rememberMe">
+						Khi bấm vào nút đăng ký, bạn đồng ý với
+						<span style="color:rgb(0,135,201);">
+							<a href="#terms" style="text-decoration:none;">Điều khoản </a>
+						</span>
+						và
+						<span>
+						<span style="color:rgb(0,135,201);">
+							<a href="#privacyPolicy" style="text-decoration:none;">Quyền riêng tư&nbsp;</a>
+						</span>
+                            của chúng tôi
+                        </span>
+					</label>
+
+				</div>
+				<div class="create-account" style="margin-left: 37%">
+
+					<input  class="btn clever-btn w-70" type="submit" name="submit" value="Đăng ký" />
+					<a href="{% url 'ins_register' %}" >Giảng viên?</a>
+
+				</div>
+			</form>
+		</div>
+
+    </div>
+</div>
+
+     {% endif %}
+
+{% endblock %}

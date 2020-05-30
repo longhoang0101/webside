@@ -1,0 +1,27 @@
+{% extends "learning/base.html" %}
+
+
+{% block page-container %}
+{% load static %}
+ <!-- ##### Breadcumb Area Start ##### -->
+    <div class="breadcumb-area">
+        <!-- Breadcumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Giảng viên hướng dẫn</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Instructors Video Start ##### -->
+    <div class="instructors-video d-flex align-items-center justify-content-center bg-img" style="background-image: url({% static 'img/bg-img/bg4.jpg' %});">
+        <h2>Be The Best Teacher</h2>
+        <!-- video btn -->
+        <a href="https://www.youtube.com/watch?v=qC_T9ePzANg" class="video-btn"><i class="fa fa-play" aria-hidden="true"></i></a>
+    </div>
+    <!-- ##### Instructors Video End ##### -->
+
+
+{% endblock %}

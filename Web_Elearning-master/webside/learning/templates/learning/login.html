@@ -1,0 +1,41 @@
+{% extends "learning/base.html" %}
+{% block page-container %}
+
+{% if form.errors %}
+<p>Tài khoản hoặc mật khẩu sai. Vui lòng nhập lại!</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Tài khoản của bạn không có quyền truy cập trang này. Vui lòng sử dụng tài khoản khác!</p>
+    {% else %}
+    <p>Vui lòng đăng nhập để xem trang này.</p>
+    {% endif %}
+{% endif %}
+
+<form method="POST" action="{% url 'login' %}">
+{% csrf_token %}
+<table>
+<tr>
+    <td>{{ form.username.label_tag }}</td>
+    <td>{{ form.username }}</td>
+</tr>
+<tr>
+    <td>{{ form.password.label_tag }}</td>
+    <td>{{ form.password }}</td>
+</tr>
+</table>
+
+<input type="submit" value="Đăng nhâọ">
+<input type="hidden" name="next" value="">
+</form>
+
+
+
+<p><a href="/password_reset">Quên mật khẩu?  </a> <a href="/learning/register">Đăng ký</a></p>
+
+{% endblock %}
+
+
+
+

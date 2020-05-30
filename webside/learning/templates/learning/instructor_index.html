@@ -1,0 +1,38 @@
+{% extends "learning/base.html" %}
+
+
+{% block page-container %}
+<h1 style="text-align: center;">Danh sách khóa học</h1>
+<hr>
+{% if perms.learning.delete_course and perms.learning.view_course and perms.learning.change_course and perms.learning.add_course  %}
+<div style="margin-top: 5%; margin-bottom: 5%">
+    {% for c in course %}
+    <table style="">
+        <tr>
+             <td>
+                {{c.course_id}} |
+            </td>
+            <td>
+                {{c.course_name}} |
+            </td>
+            <td>
+                {{c.course_cate_id.course_cate_name}}
+            </td>
+
+            <td style="margin-left: 20%">
+                <a class="btn-warning" style="color: red" href="{{c.course_id}}/delete">Xóa</a>
+                <a class="btn-warning" style="color: red" href="{{c.course_id}}/update">Sửa</a>
+            </td>
+            <hr>
+        </tr>
+    </table>
+
+
+    {% endfor %}
+<div><a href="{% url 'add_course' %}"><button class="btn btn-outline-dark">Thêm khóa học</button></a></div>
+</div>
+{% else %}
+    <h1 style="color: red">Tài khoản của bạn không có quyền truy cập trang này</h1>
+{% endif %}
+
+{% endblock %}

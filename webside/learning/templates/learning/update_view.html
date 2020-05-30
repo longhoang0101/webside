@@ -1,0 +1,20 @@
+{% extends "learning/base.html" %}
+
+
+{% block page-container %}
+<div class="main">
+    <h1 style="color: red; text-align: center">Chỉnh sửa khóa học</h1>
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        {{ form.as_p }}
+
+        <input type="submit" value="Update">
+    </form>
+
+</div>
+{% endblock %}
+
+

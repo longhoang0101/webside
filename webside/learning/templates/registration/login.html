@@ -1,0 +1,46 @@
+{% extends "learning/base.html" %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block page-container %}
+
+  <div>
+	  {% if user.is_authenticated %}
+	  	<meta http-equiv="refresh" content="1;url={% url 'base' %}" />
+	  {% else %}
+  	<div class="col-12 col-lg-6" style="margin:auto; margin-top:10%; margin-bottom: 10%">
+		<div class="contact-form">
+			<h4 style="text-align: center">Đăng nhập</h4>
+			 <form method="post" action="{% url 'login' %}">
+               {% csrf_token %}
+				<h3 class="form-title"></h3>
+				<input class="form-control" type="text" placeholder="Tài khoản" name="username" required id="id_username">
+				<input class="form-control" type="password" type="text" placeholder="Mật khẩu" name="password" required id="id_password">
+				<div class="form-actions">
+					<input type="checkbox" id ="rememberMe" name="rememberMe"><label style="color: #8290a3;" for="rememberMe">Ghi nhớ</label>
+					<input type="submit" class="btn clever-btn w-100" value="Đăng nhập" />
+                    <input type="hidden" name="next" value="{{ next }}" />
+
+
+
+				</div>
+
+				<div class="create-account">
+				<p>
+					<a href="{% url 'register' %}">Tạo tài khoản mới</a>
+				</p>
+
+				</div>
+			 </form>
+			</form>
+			{% if form.errors %}
+    		<p style="text-align:center; font-size: 20px; color:red">Tài khoản hoặc mật khẩu không chính xác!</p>
+  			{% endif %}
+		</div>
+	</div>
+  </div>
+	  {% endif %}
+
+{% endblock %}

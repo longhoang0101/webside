@@ -1,0 +1,22 @@
+{% extends "learning/base.html" %}
+{% load static %}
+
+{% block page-container %}
+<h1 style="text-align: center">Thêm khóa học mới</h1>
+<hr>
+                    <div class="form-control" style="display: block">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group">
+                                        {{form.as_p}}
+                                    <div class="col-12">
+                                    <input type="submit" class="btn clever-btn w-100" placeholder="Gửi">
+                                </div>
+                            </div>
+                                </div>
+                            </div>
+                    </form>
+                    </div>
+{% endblock %}

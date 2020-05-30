@@ -1,0 +1,16 @@
+{% extends "learning/base.html" %}
+{% load static %}
+
+{% block page-container %}
+<div class="form-control" style="margin: auto">
+    <!-- Create a Form -->
+    <form method="POST">
+        <!-- Security token by Django -->
+        {% csrf_token %}
+        Bạn có chắc muốn xóa khóa học này chứ ?
+        <input type="submit" value="Có" />
+        <a href="{% url 'ins_index' %">Hủy </a>
+    </form>
+</div>
+
+{% endblock %}

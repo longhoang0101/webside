@@ -1,0 +1,45 @@
+{% extends "learning/base.html" %}
+
+
+<body>
+
+<div class="container">
+
+    {% include "header_login.html" %}
+
+
+    <div class="login_box">
+        {% block page-container %}
+            <form method="post" action="/learning/signup">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>{{ form.customer_name.label_tag }}</td>
+                        <td>{{ form.customer_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.username.label_tag }}</td>
+                        <td>{{ form.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.customer_mail.label_tag }}</td>
+                        <td>{{ form.customer_mail }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.password.label_tag }}</td>
+                        <td>{{ form.password }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ form.password_again.label_tag }}</td>
+                        <td>{{ form.password_again }}</td>
+                    </tr>
+                </table>
+
+                <input type="submit" value="Submit"/>
+            </form>
+        {% endblock %}
+    </div>
+
+</div>
+
+</body>

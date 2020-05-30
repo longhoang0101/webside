@@ -1,0 +1,45 @@
+{% extends "learning/base.html" %}
+
+
+{% block page-container %}
+{% load static %}
+
+	<ul>
+    							{% for course in courses %}
+         						<li>{{ course }}</li>
+									<td>
+										<div class="card">
+								  		<img src="static/Image/{{course.course_image}}" class="course-image">
+								  	<div class="card-content">
+									<h4><b>{{course.course_name}}</b></h4>
+									<p>{{course.course_overview}}</p>
+									<h4 style="float: right;">{{course.course_price}}</h4>
+								    </div>
+
+									</div>
+									</td>
+
+   								 {% empty %}
+         						<li> No Passengers </li>
+    							{% endfor %}
+							</ul>
+
+
+
+		<script>
+			var acc = document.getElementsByClassName("accordion");
+			var i;
+			for (i = 0; i < acc.length; i++) {
+				acc[i].addEventListener("click", function() {
+					this.classList.toggle("active");
+					var panel = this.nextElementSibling;
+					if (panel.style.display === "block") {
+						panel.style.display = "none";
+					} else {
+						panel.style.display = "block";
+					}
+				});
+			}
+		</script>
+
+{% endblock %}
